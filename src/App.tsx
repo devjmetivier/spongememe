@@ -4,6 +4,8 @@ import './app.css';
 const App: React.FC = () => {
   // const [imgSoruce, setImgSoruce] = React.useState('');
   const [inputText0, setInputText0] = React.useState('');
+  const [success, setSuccess] = React.useState(false);
+  const [error, setError] = React.useState(false);
   // const [inputText1, setInputText1] = React.useState('');
 
   // const fetchImage = async () => {
@@ -39,6 +41,22 @@ const App: React.FC = () => {
       .map((c: string, i: number) => (i % 2 ? c.toUpperCase() : c.toLowerCase()))
       .join('');
 
+  const clipIt = () => {
+    navigator.clipboard
+      .writeText(mock(inputText0))
+      .then(() => setSuccess(true))
+      .catch(() => setError(true));
+  };
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      if (success || error) {
+        setSuccess(false);
+        setError(false);
+      }
+    }, 3000);
+  });
+
   return (
     <div className='container'>
       {/* <div>{imgSoruce && <img alt="Sponge Meme" src={imgSoruce} />}</div> */}
@@ -70,7 +88,11 @@ const App: React.FC = () => {
         </div> */}
       </div>
 
-      <div>{mock(inputText0)}</div>
+      <div onClick={() => clipIt()}>{mock(inputText0)}</div>
+      <div>
+        {success && '✅'}
+        {error && '🚫'}
+      </div>
       {/* <div>{mock(inputText1)}</div> */}
     </div>
   );
