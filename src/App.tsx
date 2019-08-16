@@ -1,39 +1,12 @@
 import * as React from 'react';
-import './app.css';
+
+import './reboot.css';
+import * as Styled from './App.style';
 
 const App: React.FC = () => {
-  // const [imgSoruce, setImgSoruce] = React.useState('');
-  const [inputText0, setInputText0] = React.useState('');
+  const [inputText, setInputText] = React.useState('');
   const [success, setSuccess] = React.useState(false);
   const [error, setError] = React.useState(false);
-  // const [inputText1, setInputText1] = React.useState('');
-
-  // const fetchImage = async () => {
-  //   const template_id = '102156234';
-  //   const username = 'DevinMetivier1';
-  //   const password = 'supersecret';
-  //   const url = `https://api.imgflip.com/caption_image?template_id=${template_id}&text0=${inputText0}&text1=${inputText1}&username=${username}&password=${password}`;
-
-  //   await fetch(url, {
-  //     method: 'POST',
-  //     mode: 'no-cors',
-  //     headers: {
-  //       'Access-Control-Allow-Origin': '*',
-  //       'Access-Control-Allow-Methods': 'POST',
-  //       'Access-Control-Allow-Headers': 'Content-Type',
-  //       'Content-Type': 'application/json',
-  //       'Accept-Encoding': 'gzip',
-  //     },
-  //   })
-  //     .then(async res => {
-  //       console.log(res);
-  //       return await res.json();
-  //     })
-  //     .then(async json => {
-  //       console.log(json.body);
-  //       return await setImgSoruce(json.body.data.url);
-  //     });
-  // };
 
   const mock = (s: string) =>
     s
@@ -43,7 +16,7 @@ const App: React.FC = () => {
 
   const clipIt = () => {
     navigator.clipboard
-      .writeText(mock(inputText0))
+      .writeText(mock(inputText))
       .then(() => setSuccess(true))
       .catch(() => setError(true));
   };
@@ -54,47 +27,31 @@ const App: React.FC = () => {
         setSuccess(false);
         setError(false);
       }
-    }, 3000);
+    }, 1500);
   });
 
   return (
-    <div className='container'>
-      {/* <div>{imgSoruce && <img alt="Sponge Meme" src={imgSoruce} />}</div> */}
-      <div>
-        <input
+    <Styled.Container className='container'>
+      <Styled.InputContainer>
+        <Styled.Input
           autoFocus
           id='mock'
           name='mock'
-          onChange={({ target: { value } }) => setInputText0(value)}
+          onChange={({ target: { value } }) => setInputText(value)}
           type='text'
-          value={inputText0}
+          value={inputText}
         />
+      </Styled.InputContainer>
 
-        {/* <label htmlFor="mock">
-          <div>Bottom</div>
-          <input
-            id="mock"
-            name="mock"
-            onChange={({ target: { value } }) => setInputText1(value)}
-            type="text"
-            value={inputText1}
-          />
-        </label> */}
+      <Styled.MockTextContainer>
+        <Styled.MockText onClick={() => clipIt()}>{mock(inputText)}</Styled.MockText>
+      </Styled.MockTextContainer>
 
-        {/* <div>
-          <button onClick={() => fetchImage()} type="button">
-            Gimme My Meme
-          </button>
-        </div> */}
-      </div>
-
-      <div onClick={() => clipIt()}>{mock(inputText0)}</div>
-      <div>
-        {success && '✅'}
-        {error && '🚫'}
-      </div>
-      {/* <div>{mock(inputText1)}</div> */}
-    </div>
+      <Styled.Message>
+        {success && '✅ Copied ✅'}
+        {error && '🚫 Error 🚫'}
+      </Styled.Message>
+    </Styled.Container>
   );
 };
 
