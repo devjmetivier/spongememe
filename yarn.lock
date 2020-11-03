@@ -868,6 +868,11 @@
   dependencies:
     "@hapi/hoek" "8.x.x"
 
+"@hookit/sarcasm@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@hookit/sarcasm/-/sarcasm-0.0.5.tgz#399fad5b84d25ad09a99b699d895cce7504dd9f6"
+  integrity sha512-12ouEhsb+AzI5m+5qd20X6E6YMrBJ4nGQRBvFu9fG6CLtq1lp0s6RE11by4vHCCAe2fJxkFiogOzoRfSLWrNFw==
+
 "@jest/console@^24.7.1":
   version "24.7.1"
   resolved "https://registry.yarnpkg.com/@jest/console/-/console-24.7.1.tgz#32a9e42535a97aedfe037e725bd67e954b459545"
